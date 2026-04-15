@@ -91,17 +91,29 @@ class Gate {
     this.holeSize = 90 * levelManager.holeSizeFactor;
     this.color = { ...getLevelColor(levelManager.level) };
     this.rotation = Math.random() * Math.PI * 2;
-    const maxReach = 112;
-    const gWAtCross = Math.pow(0.5, 1.6) * renderer.W * 0.92 / 2;
-    const gHAtCross = Math.pow(0.5, 1.6) * renderer.H * 0.92 / 2;
-    const maxOffsetX = Math.min(1, maxReach / Math.max(1, gWAtCross - this.holeSize));
-    const maxOffsetY = Math.min(1, maxReach / Math.max(1, gHAtCross - this.holeSize));
-    this.holeOffsetX = (Math.random() * 2 - 1) * maxOffsetX;
-    this.holeOffsetY = (Math.random() * 2 - 1) * maxOffsetY;
+    const MAX_REACH_X = 104;
+    const MAX_REACH_Y = 104;
+
+    const tCross = Math.pow(0.48, 1.6);
+    const gHalfWAtCross = tCross * renderer.W * 0.92 / 2;
+    const gHalfHAtCross = tCross * renderer.H * 0.92 / 2;
+
+    const holeTravelX = Math.max(1, gHalfWAtCross - this.holeSize * tCross);
+    const holeTravelY = Math.max(1, gHalfHAtCross - this.holeSize * tCross);
+
+    // Random point inside a reachable ellipse
+    const a = Math.random() * Math.PI * 2;
+    const r = Math.sqrt(Math.random());
+
+    const px = Math.cos(a) * r * MAX_REACH_X;
+    const py = Math.sin(a) * r * MAX_REACH_Y;
+
+    this.holeOffsetX = Math.max(-1, Math.min(1, px / holeTravelX));
+    this.holeOffsetY = Math.max(-1, Math.min(1, py / holeTravelY));
     this.flashDuration = 1.2;
     this.flashTimer = 0;
     this.hasCrossed = false;
-  }
+    }
 
   update(dt, journeyMs) {
     const prev = this.tRaw;
