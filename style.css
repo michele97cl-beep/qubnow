@@ -1,0 +1,237 @@
+:root {
+  --bg: #f5f5f3;
+  --primary: #1a1a1a;
+  --secondary: #555555;
+  --danger: #cc0000;
+  --dim: rgba(0, 0, 0, 0.35);
+  --glow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  --glow-lg: 0 2px 16px rgba(0, 0, 0, 0.13);
+  --font-mono: "Plus Jakarta Sans", sans-serif;
+  --level-color: #7c3aed;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  height: 100vh;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+#ui {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+#hud {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.hud-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--dim);
+}
+
+.hud-value {
+  font-size: 22px;
+  letter-spacing: 0.15em;
+  color: var(--primary);
+  text-shadow: var(--glow);
+}
+
+#overlay,
+#deathOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#overlay {
+  background: rgba(245, 245, 243, 0.88);
+}
+
+#deathOverlay {
+  background: rgba(255, 235, 235, 0.88);
+}
+
+.death-message {
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--secondary);
+  max-width: 420px;
+  text-align: center;
+  line-height: 1.8;
+}
+
+#overlay.active,
+#deathOverlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.title-grid {
+  display: flex;
+  gap: 16px;
+  line-height: 1;
+}
+
+.title-line {
+  font-size: clamp(52px, 10vw, 96px);
+  letter-spacing: 0.05em;
+  color: var(--dim);
+}
+
+.title-line.accent {
+  color: var(--primary);
+  font-weight: 600;
+}
+.title-line.accent.red {
+  color: var(--danger);
+}
+
+.subtitle {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--dim);
+}
+
+.key-hints {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 8px 0;
+  text-align: center;
+}
+
+.key-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+}
+
+kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--dim);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--primary);
+  box-shadow: var(--glow);
+}
+
+button {
+  pointer-events: all;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: #f0f0f0;
+  background: #1a1a1a;
+  border: none;
+  padding: 14px 40px;
+  cursor: pointer;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  background: #444;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+}
+
+#levelUp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+#levelUp.active {
+  opacity: 1;
+}
+
+.levelup-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  color: var(--level-color);
+}
+
+.levelup-number {
+  font-size: clamp(64px, 12vw, 120px);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--level-color);
+  text-shadow: 0 4px 32px var(--level-color);
+  line-height: 1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  pointer-events: none;
+  z-index: 999;
+}

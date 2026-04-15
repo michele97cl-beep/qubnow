@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Q UB</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="ui">
+      <div id="hud">
+        <div class="hud-item">
+          <span class="hud-label">DIST</span>
+          <span class="hud-value" id="score">0000</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">LVL</span>
+          <span class="hud-value" id="level">01</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">SPD</span>
+          <span class="hud-value" id="speed">1.0x</span>
+        </div>
+      </div>
+
+      <div id="overlay" class="active">
+        <div class="overlay-content">
+          <div class="title-grid">
+            <span class="title-line">Q</span>
+            <span class="title-line accent">UB</span>
+          </div>
+          <p class="subtitle">NEURAL OBSTACLE SYSTEM</p>
+          <div class="key-hints">
+            <div class="key-row">
+              <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd>
+              <span>MOVE</span>
+            </div>
+            <div class="key-row">
+              <span>RELEASE = SNAP BACK TO ORIGIN</span>
+            </div>
+          </div>
+          <button id="startBtn">INITIALIZE</button>
+        </div>
+      </div>
+
+      <div id="deathOverlay">
+        <div class="overlay-content">
+          <div class="title-grid">
+            <span class="title-line">Q</span>
+            <span class="title-line accent red">UB</span>
+          </div>
+          <p class="subtitle" id="deathScore">DISTANCE: 0000</p>
+          <p class="death-message" id="deathMessage"></p>
+          <button id="restartBtn">REINITIALIZE</button>
+        </div>
+      </div>
+
+      <div id="levelUp">
+        <span class="levelup-label" id="levelUpLabel">LEVEL</span>
+        <span class="levelup-number" id="levelUpNumber">01</span>
+      </div>
+    </div>
+
+    <!-- Load order matters: engine first, entities second, main last -->
+    <script src="engine.js"></script>
+    <script src="entities.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
