@@ -91,11 +91,13 @@ class Gate {
     this.holeSize = 90 * levelManager.holeSizeFactor;
     this.color = { ...getLevelColor(levelManager.level) };
     this.rotation = Math.random() * Math.PI * 2;
-    const maxReach = Math.min(window.innerWidth, window.innerHeight) * 0.18;
-    const gWAtCross = Math.pow(0.5, 1.6) * Math.min(window.innerWidth, window.innerHeight) * 0.92 / 2;
-    const maxOffset = Math.min(1, maxReach / Math.max(1, gWAtCross - this.holeSize));
-    this.holeOffsetX = (Math.random() * 2 - 1) * maxOffset;
-    this.holeOffsetY = (Math.random() * 2 - 1) * maxOffset;
+    const maxReach = 112;
+    const gWAtCross = Math.pow(0.5, 1.6) * renderer.W * 0.92 / 2;
+    const gHAtCross = Math.pow(0.5, 1.6) * renderer.H * 0.92 / 2;
+    const maxOffsetX = Math.min(1, maxReach / Math.max(1, gWAtCross - this.holeSize));
+    const maxOffsetY = Math.min(1, maxReach / Math.max(1, gHAtCross - this.holeSize));
+    this.holeOffsetX = (Math.random() * 2 - 1) * maxOffsetX;
+    this.holeOffsetY = (Math.random() * 2 - 1) * maxOffsetY;
     this.flashDuration = 1.2;
     this.flashTimer = 0;
     this.hasCrossed = false;
@@ -201,7 +203,7 @@ class Gate {
 
 // ────────────────────────────────────────────────────────────────
 class GateSpawner {
-  constructor(levelManager) {
+  constructor(levelManager, renderer) {
     this.lm = levelManager;
     this.gates = [];
     this.journeyMs = 6000;
@@ -237,7 +239,7 @@ class GateSpawner {
     }
     this.timeSinceSpawn += dt * 1000;
     if (this.timeSinceSpawn >= this.nextSpawnIn) {
-      this.gates.push(new Gate(this.lm));
+      this.gates.push(new Gate(this.lm, this.renderer));
       this.timeSinceSpawn = 0;
       this.nextSpawnIn = this._spawnInterval();
     }
