@@ -91,16 +91,9 @@ class Gate {
     this.holeSize = 90 * levelManager.holeSizeFactor;
     this.color = { ...getLevelColor(levelManager.level) };
     this.rotation = Math.random() * Math.PI * 2;
-    const maxReach = 112;
-    const gWAtCross =
-      (Math.pow(0.5, 1.6) *
-        Math.min(window.innerWidth, window.innerHeight) *
-        0.92) /
-      2;
-    const maxOffset = Math.min(
-      1,
-      maxReach / Math.max(1, gWAtCross - this.holeSize)
-    );
+    const maxReach = Math.min(window.innerWidth, window.innerHeight) * 0.18;
+    const gWAtCross = Math.pow(0.5, 1.6) * Math.min(window.innerWidth, window.innerHeight) * 0.92 / 2;
+    const maxOffset = Math.min(1, maxReach / Math.max(1, gWAtCross - this.holeSize));
     this.holeOffsetX = (Math.random() * 2 - 1) * maxOffset;
     this.holeOffsetY = (Math.random() * 2 - 1) * maxOffset;
     this.flashDuration = 1.2;
