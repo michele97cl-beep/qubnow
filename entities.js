@@ -84,7 +84,7 @@ class LevelManager {
 
 // ────────────────────────────────────────────────────────────────
 class Gate {
-  constructor(levelManager) {
+  constructor(levelManager, renderer) {
     this.tRaw = 0;
     this.alive = true;
     this.shape = HOLE_SHAPES[Math.floor(Math.random() * HOLE_SHAPES.length)];
@@ -205,6 +205,7 @@ class Gate {
 class GateSpawner {
   constructor(levelManager, renderer) {
     this.lm = levelManager;
+    this.renderer = renderer;
     this.gates = [];
     this.journeyMs = 6000;
     this.nextSpawnIn = 500;
