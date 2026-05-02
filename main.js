@@ -68,7 +68,11 @@ const loop = new GameLoop(
       0
     );
     renderer.drawProximityMarker(maxProximity);
-    [...spawner.gates]
+    const allGates = tutorial.active && tutorial.gate
+      ? [...spawner.gates, tutorial.gate]
+      : [...spawner.gates];
+
+    allGates
       .sort((a, b) => a.t - b.t)
       .forEach((gate) => {
         const gW = gate.t * renderer.W * 0.92;
