@@ -9,6 +9,7 @@ const input = new InputManager();
 const player = new Player(renderer);
 const levelMgr = new LevelManager();
 const spawner = new GateSpawner(levelMgr, renderer);
+const tutorial = new TutorialManager();
 const announcer = new LevelUpAnnouncer();
 const scoreEl = document.getElementById("score");
 const levelEl = document.getElementById("level");
