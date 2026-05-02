@@ -61,7 +61,6 @@ const loop = new GameLoop(
       for (const gate of spawner.gates) {
         if (gate.checkCollision(player.x, player.y, player.size, renderer)) {
           gameActive = false;
-          loop.stop();
           player.kill();
           document.getElementById("deathScore").textContent =
             "DISTANCE: " + String(Math.floor(distance)).padStart(4, "0");
