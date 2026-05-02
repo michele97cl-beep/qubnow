@@ -366,8 +366,14 @@ class TutorialManager {
     this.complete = false;
     this.onComplete = onComplete;
     this.gate = null;
-    this.currentHint = null;
-    this._showHint("The system wants to test you. It will make you pass through a series of gates to assess you.");
+    this.currentHint = "keys";
+    this._showHint("Use the arrow keys to move. Release to return to center.");
+    setTimeout(() => {
+      if (this.active && this.currentHint === "keys") {
+        this.currentHint = "move";
+        this._showHint("The system wants to test you. It will make you pass through a series of gates to assess you.");
+      }
+    }, 3000);
   }
 
   spawnGate(levelManager, renderer) {
