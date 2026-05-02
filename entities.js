@@ -79,6 +79,7 @@ class LevelManager {
   }
   reset() {
     this.level = 1;
+    this.pendingLevel = null;
   }
 }
 
