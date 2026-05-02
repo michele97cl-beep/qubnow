@@ -384,21 +384,30 @@ class TutorialManager {
     return this.gate;
   }
 
-  update(dt, spawner) {
-    if (!this.active || !this.gate) return;
+  update(dt, player, renderer) {
+    if (!this.active) return;
 
-    const tRaw = this.gate.tRaw;
+    const tRaw = this.gate ? this.gate.tRaw : 0;
+    const distFromCenter = this.gate
+      ? Math.sqrt(
+          Math.pow(player.x - renderer.cx, 2) +
+          Math.pow(player.y - renderer.cy, 2)
+        )
+      : 0;
 
-    if (tRaw >= 0.2 && tRaw < 0.4 && this.currentHint !== "locate") {
+    if (this.gate && tRaw >= 0.3 && this.currentHint !== "locate") {
       this.currentHint = "locate";
       this._showHint("Locate the weakness. Pass through.");
-    } else if (tRaw >= 0.4 && tRaw < 0.48 && this.currentHint !== "release") {
-      this.currentHint = "release";
-      this._showHint("Release controls to return to the center position.");
     }
 
-    if (this.gate.hasCrossed && !this.complete) {
+    if (
+      this.gate &&
+      this.gate.hasCrossed &&
+      this.currentHint !== "complete" &&
+      !this.complete
+    ) {
       this.complete = true;
+      this.currentHint = "complete";
       this._showHint("Breach successful. The system recalibrates.");
       setTimeout(() => {
         this._hideHint();
