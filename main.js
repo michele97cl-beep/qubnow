@@ -120,11 +120,11 @@ function startGame() {
   deathOv.classList.remove("active");
   player.reset();
   loop.stop();
-  loop.start();
   tutorial.start(() => {
     gameActive = true;
   });
   tutorial.gate = tutorial.spawnGate(levelMgr);
+  loop.start();
 }
 
 window.addEventListener("keydown", (e) => {
