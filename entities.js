@@ -370,7 +370,7 @@ class TutorialManager {
     this._showHint("The system wants to test you. It will make you pass through a series of gates to assess you.");
   }
 
-  spawnGate(levelManager) {
+  spawnGate(levelManager, renderer) {
     this.gate = new Gate(levelManager);
     this.gate.holeOffsetX = 0;
     this.gate.holeOffsetY = 0;
