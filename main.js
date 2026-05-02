@@ -58,6 +58,7 @@ const loop = new GameLoop(
     spawner.update(dt);
 
     if (gameActive) {
+      console.log('checking collisions, gates:', spawner.gates.length);
       for (const gate of spawner.gates) {
         if (gate.checkCollision(player.x, player.y, player.size, renderer)) {
           gameActive = false;
