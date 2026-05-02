@@ -34,8 +34,11 @@ const loop = new GameLoop(
       }
     }
 
-    if (!gameActive) return;
     player.update(dt, input);
+    announcer.update(dt);
+
+    if (!gameActive) return;
+
     distance += dt * 80 * levelMgr.speedMultiplier;
     scoreEl.textContent = String(Math.max(0, Math.floor(distance))).padStart(
       4,
@@ -50,7 +53,6 @@ const loop = new GameLoop(
         speedEl.textContent = levelMgr.speedMultiplier.toFixed(1) + "x";
       });
     }
-    announcer.update(dt);
     spawner.update(dt);
 
     if (gameActive) {
