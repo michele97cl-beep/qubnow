@@ -348,6 +348,85 @@ class Player {
 }
 
 // ────────────────────────────────────────────────────────────────
+
+// ────────────────────────────────────────────────────────────────
+class TutorialManager {
+  constructor() {
+    this.el = document.getElementById("tutorialHint");
+    this.textEl = document.getElementById("tutorialText");
+    this.active = false;
+    this.complete = false;
+    this.gate = null;
+    this.onComplete = null;
+    this.currentHint = null;
+  }
+
+  start(onComplete) {
+    this.active = true;
+    this.complete = false;
+    this.onComplete = onComplete;
+    this.gate = null;
+    this.currentHint = null;
+    this._showHint("The system wants to test you. It will make you pass through a series of gates to assess you.");
+  }
+
+  spawnGate(levelManager) {
+    this.gate = new Gate(levelManager);
+    this.gate.holeOffsetX = 0;
+    this.gate.holeOffsetY = 0;
+    this.gate.holeSize = 120;
+    return this.gate;
+  }
+
+  update(dt, spawner) {
+    if (!this.active || !this.gate) return;
+
+    const tRaw = this.gate.tRaw;
+
+    if (tRaw >= 0.25 && tRaw < 0.45 && this.currentHint !== "locate") {
+      this.currentHint = "locate";
+      this._showHint("Locate the weakness. Pass through.");
+    } else if (tRaw >= 0.45 && tRaw < 0.5 && this.currentHint !== "release") {
+      this.currentHint = "release";
+      this._showHint("Release controls to return to the center position.");
+    }
+
+    if (this.gate.hasCrossed && !this.complete) {
+      this.complete = true;
+      this._showHint("Breach successful. The system recalibrates.");
+      setTimeout(() => {
+        this._hideHint();
+        this.active = false;
+        if (this.onComplete) this.onComplete();
+      }, 2500);
+    }
+  }
+
+  checkFailure(gate) {
+    if (!this.active || !gate) return false;
+    return gate.tRaw > 0.52 && !gate.hasCrossed;
+  }
+
+  _showHint(text) {
+    this.textEl.textContent = text;
+    this.el.classList.add("active");
+  }
+
+  _hideHint() {
+    this.el.classList.remove("active");
+  }
+
+  reset() {
+    this.active = false;
+    this.complete = false;
+    this.gate = null;
+    this.currentHint = null;
+    this._hideHint();
+  }
+}
+
+// ────────────────────────────────────────────────────────────────
+
 class LevelUpAnnouncer {
   constructor() {
     this.el = document.getElementById("levelUp");
