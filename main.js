@@ -123,7 +123,7 @@ function startGame() {
   tutorial.start(() => {
     gameActive = true;
   });
-  tutorial.gate = tutorial.spawnGate(levelMgr);
+  tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
   console.log('tutorial gate after spawn:', tutorial.gate, 'active:', tutorial.active);
   loop.start();
 }
