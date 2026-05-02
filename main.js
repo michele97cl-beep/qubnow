@@ -48,7 +48,7 @@ const loop = new GameLoop(
       tutorial.gate.update(dt, 10000);
       tutorial.update(dt, spawner);
       if (tutorial.checkFailure(tutorial.gate)) {
-        tutorial.gate = tutorial.spawnGate(levelMgr);
+        tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
       }
     }
 
