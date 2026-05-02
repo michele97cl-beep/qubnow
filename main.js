@@ -126,9 +126,12 @@ function startGame() {
   tutorial.start(() => {
     gameActive = true;
   });
-  tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
-  console.log('tutorial gate after spawn:', tutorial.gate, 'active:', tutorial.active);
   loop.start();
+  setTimeout(() => {
+    if (tutorial.active) {
+      tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
+    }
+  }, 6000);
 }
 
 window.addEventListener("keydown", (e) => {
