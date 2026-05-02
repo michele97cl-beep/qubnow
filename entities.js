@@ -426,8 +426,11 @@ class TutorialManager {
   }
 
   _showHint(text) {
-    this.textEl.textContent = text;
-    this.el.classList.add("active");
+    this.el.classList.remove("active");
+    setTimeout(() => {
+      this.textEl.textContent = text;
+      this.el.classList.add("active");
+    }, 400);
   }
 
   _hideHint() {
