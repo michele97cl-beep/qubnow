@@ -26,12 +26,14 @@ const loop = new GameLoop(
     gridTime += dt * 1000;
     renderer.gridTime = gridTime;
 
-    if (tutorial.active && tutorial.gate) {
-      tutorial.gate.update(dt, 10000);
-      tutorial.update(dt, spawner);
-      if (tutorial.checkFailure(tutorial.gate)) {
-        tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
+    if (tutorial.active) {
+      if (tutorial.gate) {
+        tutorial.gate.update(dt, 10000);
+        if (tutorial.checkFailure(tutorial.gate)) {
+          tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
+        }
       }
+      tutorial.update(dt, player, renderer);
     }
 
     player.update(dt, input);
