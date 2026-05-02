@@ -410,9 +410,12 @@ class TutorialManager {
       this.currentHint = "complete";
       this._showHint("Breach successful. The system recalibrates.");
       setTimeout(() => {
-        this._hideHint();
-        this.active = false;
-        if (this.onComplete) this.onComplete();
+        this._showHint("Instructions complete. You are now autonomous. Level 01 begins.");
+        setTimeout(() => {
+          this._hideHint();
+          this.active = false;
+          if (this.onComplete) this.onComplete();
+        }, 2500);
       }, 2500);
     }
   }
