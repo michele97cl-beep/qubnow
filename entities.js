@@ -366,12 +366,12 @@ class TutorialManager {
     this.complete = false;
     this.onComplete = onComplete;
     this.gate = null;
-    this.currentHint = "keys";
-    this._showHint("Use the arrow keys to move. Release to return to center.");
+    this.currentHint = "move";
+    this._showHint("The system wants to test you. It will make you pass through a series of gates to assess you.");
     setTimeout(() => {
-      if (this.active && this.currentHint === "keys") {
-        this.currentHint = "move";
-        this._showHint("The system wants to test you. It will make you pass through a series of gates to assess you.");
+      if (this.active && this.currentHint === "move") {
+        this.currentHint = "keys";
+        this._showHint("Use the arrow keys to move. Release to return to center.");
       }
     }, 3000);
   }
