@@ -371,7 +371,7 @@ class TutorialManager {
   }
 
   spawnGate(levelManager, renderer) {
-    this.gate = new Gate(levelManager);
+    this.gate = new Gate(levelManager, renderer);
     this.gate.holeOffsetX = 0;
     this.gate.holeOffsetY = 0;
     this.gate.holeSize = 120;
