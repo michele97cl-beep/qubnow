@@ -124,6 +124,7 @@ function startGame() {
     gameActive = true;
   });
   tutorial.gate = tutorial.spawnGate(levelMgr);
+  console.log('tutorial gate after spawn:', tutorial.gate, 'active:', tutorial.active);
   loop.start();
 }
 
