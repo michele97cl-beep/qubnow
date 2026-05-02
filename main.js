@@ -23,9 +23,18 @@ let gameActive = false;
 
 const loop = new GameLoop(
   (dt) => {
-    if (!gameActive) return;
     gridTime += dt * 1000;
     renderer.gridTime = gridTime;
+
+    if (tutorial.active && tutorial.gate) {
+      tutorial.gate.update(dt, 10000);
+      tutorial.update(dt, spawner);
+      if (tutorial.checkFailure(tutorial.gate)) {
+        tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
+      }
+    }
+
+    if (!gameActive) return;
     player.update(dt, input);
     distance += dt * 80 * levelMgr.speedMultiplier;
     scoreEl.textContent = String(Math.max(0, Math.floor(distance))).padStart(
@@ -43,14 +52,6 @@ const loop = new GameLoop(
     }
     announcer.update(dt);
     spawner.update(dt);
-
-    if (tutorial.active && tutorial.gate) {
-      tutorial.gate.update(dt, 10000);
-      tutorial.update(dt, spawner);
-      if (tutorial.checkFailure(tutorial.gate)) {
-        tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
-      }
-    }
 
     if (gameActive) {
       for (const gate of spawner.gates) {
