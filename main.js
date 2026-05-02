@@ -44,6 +44,14 @@ const loop = new GameLoop(
     announcer.update(dt);
     spawner.update(dt);
 
+    if (tutorial.active && tutorial.gate) {
+      tutorial.gate.update(dt, 10000);
+      tutorial.update(dt, spawner);
+      if (tutorial.checkFailure(tutorial.gate)) {
+        tutorial.gate = tutorial.spawnGate(levelMgr);
+      }
+    }
+
     if (gameActive) {
       for (const gate of spawner.gates) {
         if (gate.checkCollision(player.x, player.y, player.size, renderer)) {
