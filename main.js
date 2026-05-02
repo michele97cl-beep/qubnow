@@ -109,10 +109,11 @@ const loop = new GameLoop(
 function startGame() {
   distance = 0;
   gridTime = 0;
-  gameActive = true;
+  gameActive = false;
   renderer.gridTime = 0;
   levelMgr.reset();
   spawner.reset();
+  tutorial.reset();
   levelEl.textContent = "01";
   speedEl.textContent = "1.0x";
   overlay.classList.remove("active");
@@ -120,6 +121,10 @@ function startGame() {
   player.reset();
   loop.stop();
   loop.start();
+  tutorial.start(() => {
+    gameActive = true;
+  });
+  tutorial.gate = tutorial.spawnGate(levelMgr);
 }
 
 window.addEventListener("keydown", (e) => {
