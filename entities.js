@@ -386,6 +386,7 @@ class TutorialManager {
 
   update(dt, player, renderer) {
     if (!this.active) return;
+    console.log('tutorial update - renderer:', renderer, 'player:', player);
 
     const tRaw = this.gate ? this.gate.tRaw : 0;
     const distFromCenter = this.gate
