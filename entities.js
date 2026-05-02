@@ -383,10 +383,10 @@ class TutorialManager {
 
     const tRaw = this.gate.tRaw;
 
-    if (tRaw >= 0.25 && tRaw < 0.45 && this.currentHint !== "locate") {
+    if (tRaw >= 0.2 && tRaw < 0.4 && this.currentHint !== "locate") {
       this.currentHint = "locate";
       this._showHint("Locate the weakness. Pass through.");
-    } else if (tRaw >= 0.45 && tRaw < 0.5 && this.currentHint !== "release") {
+    } else if (tRaw >= 0.4 && tRaw < 0.48 && this.currentHint !== "release") {
       this.currentHint = "release";
       this._showHint("Release controls to return to the center position.");
     }
