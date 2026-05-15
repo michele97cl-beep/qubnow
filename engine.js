@@ -3,6 +3,8 @@
 //  No game logic lives here. Stable once built.
 // ================================================================
 
+// © 2026 Michele Cingolani. All rights reserved.
+
 class Renderer {
   constructor(canvas) {
     this.canvas = canvas;
