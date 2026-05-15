@@ -135,6 +135,10 @@ function startGame() {
       tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
     }
   }, 6000);
+  document.getElementById("skipTutorial").addEventListener("click", () => {
+    tutorial.reset();
+    gameActive = true;
+  });
 }
 
 window.addEventListener("keydown", (e) => {
