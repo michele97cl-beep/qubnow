@@ -3,6 +3,8 @@
 //  Depends on: engine.js, entities.js
 // ================================================================
 
+// © 2026 Michele Cingolani. All rights reserved.
+
 const canvas = document.getElementById("gameCanvas");
 const renderer = new Renderer(canvas);
 const input = new InputManager();
