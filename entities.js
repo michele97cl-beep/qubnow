@@ -49,7 +49,7 @@ function randomDeathMessage() {
 class LevelManager {
   constructor() {
     this.level = 1;
-    this.distPerLevel = 2400;
+    this.distPerLevel = 6400;
   }
 
   update(distance) {
