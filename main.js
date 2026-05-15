@@ -63,7 +63,6 @@ const loop = new GameLoop(
           gameActive = false;
           player.kill();
           loop.stop();
-          console.log('death triggered, overlay active:', deathOv.classList.contains('active'));
           document.getElementById("deathScore").textContent =
             "DISTANCE: " + String(Math.floor(distance)).padStart(4, "0");
           document.getElementById("deathMessage").textContent =
@@ -135,10 +134,6 @@ function startGame() {
       tutorial.gate = tutorial.spawnGate(levelMgr, renderer);
     }
   }, 6000);
-  document.getElementById("skipTutorial").addEventListener("click", () => {
-    tutorial.reset();
-    gameActive = true;
-  });
 }
 
 window.addEventListener("keydown", (e) => {
