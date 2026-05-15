@@ -89,7 +89,8 @@ class Gate {
     this.tRaw = 0;
     this.alive = true;
     this.shape = HOLE_SHAPES[Math.floor(Math.random() * HOLE_SHAPES.length)];
-    this.holeSize = 90 * levelManager.holeSizeFactor;
+    const earlyBonus = Math.max(0, 1 - (levelManager.level - 1) / 20);
+    this.holeSize = (90 + 40 * earlyBonus) * levelManager.holeSizeFactor;
     this.color = { ...getLevelColor(levelManager.level) };
     this.rotation = Math.random() * Math.PI * 2;
     const MAX_REACH_X = 104;
@@ -156,7 +157,8 @@ class Gate {
       renderer.cx + this.holeOffsetX * (gW / 2 - this.holeSize * this.t);
     const holeY =
       renderer.cy + this.holeOffsetY * (gH / 2 - this.holeSize * this.t);
-    const holeSize = this.holeSize * this.t + cubeSize * 0.05;
+    const earlyBonus = Math.max(0, 1 - (this.level - 1) / 20);
+    const holeSize = this.holeSize * this.t + cubeSize * (0.05 + 0.15 * earlyBonus);
 
     const cos = Math.cos(-this.rotation);
     const sin = Math.sin(-this.rotation);
@@ -220,10 +222,13 @@ class GateSpawner {
     this.lm = levelManager;
     this.renderer = renderer;
     this.gates = [];
-    this.journeyMs = 6000;
     this.nextSpawnIn = 500;
     this.timeSinceSpawn = 0;
     this.breatherRemaining = 0;
+  }
+
+  get journeyMs() {
+    return Math.max(1200, 6000 - (this.lm.level - 1) * 100);
   }
 
   triggerBreather(duration = 4000, onComplete) {
