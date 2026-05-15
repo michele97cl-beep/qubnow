@@ -91,6 +91,7 @@ class Gate {
     this.shape = HOLE_SHAPES[Math.floor(Math.random() * HOLE_SHAPES.length)];
     const earlyBonus = Math.max(0, 1 - (levelManager.level - 1) / 20);
     this.holeSize = (90 + 40 * earlyBonus) * levelManager.holeSizeFactor;
+    this.level = levelManager.level;
     this.color = { ...getLevelColor(levelManager.level) };
     this.rotation = Math.random() * Math.PI * 2;
     const MAX_REACH_X = 104;
