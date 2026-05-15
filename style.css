@@ -249,6 +249,22 @@ button:hover {
   line-height: 1.8;
 }
 
+#skipTutorial {
+  margin-top: 16px;
+  font-size: 10px;
+  padding: 8px 24px;
+  background: transparent;
+  color: var(--dim);
+  border: 1px solid var(--dim);
+  clip-path: none;
+  pointer-events: all;
+}
+
+#skipTutorial:hover {
+  background: rgba(0,0,0,0.05);
+  box-shadow: none;
+}
+
 body::after {
   content: "";
   position: fixed;
