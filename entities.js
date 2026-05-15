@@ -3,6 +3,8 @@
 //  Depends on: engine.js (Renderer must be loaded first)
 // ================================================================
 
+// © 2026 Michele Cingolani. All rights reserved.
+
 const LEVEL_PALETTE = [
   { hex: "#7c3aed", r: 124, g: 58, b: 237 },
   { hex: "#0ea5e9", r: 14, g: 165, b: 233 },
