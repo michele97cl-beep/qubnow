@@ -153,4 +153,8 @@ window.addEventListener("keydown", (e) => {
 
 document.getElementById("startBtn").addEventListener("click", startGame);
 document.getElementById("restartBtn").addEventListener("click", startGame);
+document.getElementById("skipTutorial").addEventListener("click", () => {
+  tutorial.reset();
+  gameActive = true;
+});
 loop.draw();
