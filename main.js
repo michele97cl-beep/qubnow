@@ -62,7 +62,8 @@ const loop = new GameLoop(
       for (const gate of spawner.gates) {
         if (gate.checkCollision(player.x, player.y, player.size, renderer)) {
           gameActive = false;
-          player.kill
+          player.kill();
+          loop.stop();
           console.log('death triggered, overlay active:', deathOv.classList.contains('active'));
           document.getElementById("deathScore").textContent =
             "DISTANCE: " + String(Math.floor(distance)).padStart(4, "0");
