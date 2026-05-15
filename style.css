@@ -265,6 +265,30 @@ button:hover {
   box-shadow: none;
 }
 
+.share-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  font-size: 9px;
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--secondary);
+  border: 1px solid rgba(0,0,0,0.2);
+  clip-path: none;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+}
+
+.share-btn:hover {
+  background: rgba(0,0,0,0.05);
+  box-shadow: none;
+  color: var(--primary);
+}
+
 body::after {
   content: "";
   position: fixed;
