@@ -152,4 +152,25 @@ document.getElementById("skipTutorial").addEventListener("click", () => {
   tutorial.reset();
   gameActive = true;
 });
+
+function getShareMessage() {
+  const dist = String(Math.floor(distance)).padStart(4, "0");
+  return `I survived ${dist} distance at QUB. The system is waiting for you. qubnow.pages.dev`;
+}
+
+document.getElementById("shareTwitter").addEventListener("click", () => {
+  const msg = encodeURIComponent(getShareMessage());
+  window.open(`https://twitter.com/intent/tweet?text=${msg}`, "_blank");
+});
+
+document.getElementById("shareFacebook").addEventListener("click", () => {
+  const url = encodeURIComponent("https://qubnow.pages.dev");
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, "_blank");
+});
+
+document.getElementById("shareWhatsapp").addEventListener("click", () => {
+  const msg = encodeURIComponent(getShareMessage());
+  window.open(`https://wa.me/?text=${msg}`, "_blank");
+});
+
 loop.draw();
